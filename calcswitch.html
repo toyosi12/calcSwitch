@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>calc 1.4</title>
+<link type="text/css" href="calc1.4.css" rel="stylesheet"/>
+</head>
+<script>
+firstvalue=0;
+secondvalue=0;
+oper='';
+function b(u){
+	if((document.getElementById("screen").value==0)&&(document.getElementById("on").value=="OFF")){
+	document.getElementById("screen").value=u;
+	}else if(document.getElementById("screen").value!=0){
+	document.getElementById("screen").value+=u;
+	}else{
+		document.getElementById("screen").value="";	
+	}
+	
+}
+
+function operator(v){
+	firstvalue=document.getElementById("screen").value
+	document.getElementById("screen").value="";
+	oper=v;	
+}
+function equals(){
+	secondvalue=document.getElementById("screen").value;
+	if(document.getElementById("on").value=="ON"){
+		document.getElementById("screen")="";	
+	}
+	
+	switch(oper){
+		case 'add':
+		document.getElementById("screen").value=parseFloat(firstvalue)+parseFloat(secondvalue);
+		break;
+		case 'minus':
+		document.getElementById("screen").value=firstvalue-secondvalue;
+		break;
+		case 'mult':
+		document.getElementById("screen").value=firstvalue*secondvalue;	
+		break;
+		case 'div':
+		document.getElementById("screen").value=firstvalue/secondvalue;
+		break;
+
+	}
+	
+	
+}
+
+function swt(){
+		swtch = document.getElementById("on").value;
+		switch(swtch){
+			case "ON":
+			document.getElementById("screen").value=0;
+			document.getElementById("on").value="OFF";
+			break;
+			case "OFF":
+			document.getElementById("screen").value="";
+			document.getElementById("on").value="ON";	
+			break;
+		}
+		
+}
+
+function toCancel(){
+	document.getElementById("screen").value="";
+}
+
+function toClear(){
+	num=document.getElementById("screen").value;
+	document.getElementById("screen").value=(num.slice(0,(num.length-1)));
+	
+}
+</script>
+
+<body>
+
+<table width="264" height="238" border="1">
+<tr>
+  <td colspan="4"><input type="button" value="ON" onclick="swt()" id="on" ></td>
+  </tr>	
+  <tr>
+    <td colspan="4"><input type="text" id="screen"></td>
+  </tr>
+  <tr>
+    <td><input type="button" name="button" id="cancel" value="C" onclick="toCancel()" /></td>
+    <td colspan="2"><input type="button" name="button2" id="button2" value="DEL" onclick="toClear()" /></td>
+    <td><input type="button" name="button14" id="button14" value="*" onclick='operator("mult")' /></td>
+  </tr>
+  <tr>
+    <td><input type="button" name="button" id="button1" value="1" onclick='b("1")' /></td>
+    <td><input type="button" name="button2" id="button2" value="2" onclick='b("2")' /></td>
+    <td><input type="button" name="button3" id="button3" value="3" onclick='b("3")' /></td>
+    <td><input type="button" name="button13" id="button13" value="/" onclick='operator("div")'  /></td>
+  </tr>
+  <tr>
+    <td><input type="button" name="button4" id="button4" value="4" onclick='b("4")' /></td>
+    <td><input type="button" name="button5" id="button5" value="5" onclick='b("5")' /></td>
+    <td><input type="button" name="button6" id="button6" value="6" onclick='b("6")' /></td>
+    <td><input type="button" name="button15" id="button15" value="-" onclick='operator("minus")' /></td>
+  </tr>
+  <tr>
+    <td><input type="button" name="button7" id="button7" value="7" onclick='b("7")' /></td>
+    <td><input type="button" name="button8" id="button8" value="8" onclick='b("8")' /></td>
+    <td><input type="button" name="button9" id="button9" value="9" onclick='b("9")' /></td>
+    <td rowspan="2"><input type="button" name="button16" id="button16" value="+" onclick='operator("add")' /></td>
+  </tr>
+  <tr>
+    <td><input type="button" name="button10" id="button10" value="." onclick='b(".")' /></td>
+    <td><input type="button" name="button11" id="button11" value="0" onclick='b("0")' /></td>
+    <td><input type="button" name="button12" id="button12" value="=" onclick='equals()' /></td>
+    
+  </tr>
+  
+</table>
+
+</body>
+</html>
